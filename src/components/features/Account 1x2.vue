@@ -1,6 +1,7 @@
 <template>
   <div class="widget-container">
-    <div class="header">내 계좌 잔액</div>
+    <div class="header">내 계좌 조회</div>
+    <div class="header">{{ formattedAccountType }}</div>
     <div class="balance">{{ formattedBalance }}</div>
     <button class="action-button" @click="showDetails">자세히</button>
   </div>
@@ -9,12 +10,12 @@
 <script>
 import axios from "axios";
 
-
 export default {
   name: "Widget",
   data() {
     return {
       accountNumber: '33333322111111',
+      accountType: '',
       balance: 0, // 초기 잔액 데이터 (숫자)
     };
   },
@@ -23,17 +24,28 @@ export default {
     formattedBalance() {
       return `₩${this.balance.toLocaleString()}`;
     },
+    // 어카운트 타입을 포맷
+    formattedAccountType() {
+      return this.accountType || '어카운트 타입 없음'; // 어카운트 타입이 없을 경우 기본 메시지
+    },
   },
   methods: {
     // '자세히' 버튼 클릭 시 알림
     showDetails() {
       alert("잔액 상세 보기");
     },
+
     // 서버에서 잔액 데이터 가져오기
-    async fetchBalance() {
+    async getWithdrawalAccount() {
+      const userDataString = localStorage.getItem('user');
+      const userData = JSON.parse(userDataString);
+      const userNum = userData.userNum;
+
       try {
-        const response = await axios.get(`http://localhost:8080/api/account/${this.accountNumber}`);
+        const response = await axios.get(`http://localhost:8080/api/account?userNum=${userNum}`);
+
         if (response.status === 200) {
+          this.accountType = response.data.accountType;
           this.balance = response.data.balance; // 서버에서 받은 잔액 데이터
         } else {
           console.error("데이터를 가져오는 데 실패했습니다.");
@@ -46,7 +58,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchBalance(); // 컴포넌트가 마운트될 때 API 호출
+    this.getWithdrawalAccount(); // 컴포넌트가 마운트될 때 API 호출
   },
 };
 </script>

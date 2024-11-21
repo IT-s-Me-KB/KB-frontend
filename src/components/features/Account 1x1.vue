@@ -29,10 +29,16 @@ export default {
       alert("잔액 상세 보기");
     },
     // 서버에서 잔액 데이터 가져오기
-    async fetchBalance() {
+    async getWithdrawalAccount() {
+      const userDataString = localStorage.getItem('user');
+      const userData = JSON.parse(userDataString);
+      const userNum = userData.userNum;
+
       try {
-        const response = await axios.get(`http://localhost:8080/api/account/${this.accountNumber}`);
+        const response = await axios.get(`http://localhost:8080/api/account?userNum=${userNum}`);
+
         if (response.status === 200) {
+          this.accountType = response.data.accountType;
           this.balance = response.data.balance; // 서버에서 받은 잔액 데이터
         } else {
           console.error("데이터를 가져오는 데 실패했습니다.");
@@ -45,7 +51,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchBalance(); // 컴포넌트가 마운트될 때 API 호출
+    this.getWithdrawalAccount(); // 컴포넌트가 마운트될 때 API 호출
   },
 };
 </script>
