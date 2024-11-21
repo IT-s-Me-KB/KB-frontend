@@ -29,17 +29,19 @@ export default {
 
 <style scoped>
 .customer-page {
-  
+  position: relative; /* 닫기 버튼과 이미지 배치를 위해 relative로 설정 */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  cursor: pointer; /* Pointer cursor to indicate it's clickable */
-  overflow: hidden; /* 컨테이너를 벗어나는 이미지 부분 숨기기 */
-  padding: 0; /* 패딩 제거 */
-  border: none; /* 경계선 제거 */
-  background: none; /* 배경색 제거 */
+  cursor: pointer;
+  overflow: hidden;
+  padding-top: 50px; /* 이미지가 화면 위쪽에 더 가까워지도록 여백 줄이기 */
+  border: none;
+  background: none;
+  height: 100vh; /* 전체 화면 높이 설정 */
 }
+
 .close-button {
   position: absolute;
   top: 20px;
@@ -52,8 +54,10 @@ export default {
 }
 
 .customer-image {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain; /* 이미지를 비율에 맞춰 표시하며 전체 영역을 채웁니다 */
+  margin-top:10px;
+  width: 100%; /* 이미지를 양옆을 꽉 채우도록 설정 */
+  height: auto; /* 이미지 비율을 유지하면서 높이 자동 조정 */
+  object-fit: cover; /* 이미지가 컨테이너의 너비를 채우도록 설정 */
+  max-height: 80%; /* 너무 큰 이미지의 경우 높이 제한 */
 }
 </style>
