@@ -1,23 +1,38 @@
 <template>
   <button class="toggle-btn">간편홈</button>
   <label class="switch">
-    <input type="checkbox" @change="navigatePage"/>
+    <input type="checkbox" v-model="isChecked" @change="navigatePage"/>
     <span class="slider"></span>
   </label>
 </template>
 
 <script>
 export default {
-  name: 'Header',
+  name: 'SimpleHome',
+  data() {
+    return {
+      isChecked: false, // 스위치의 체크 상태를 저장하는 데이터 속성
+    };
+  },
   methods: {
-    navigatePage(event) {
-      if (event.target.checked) {
-        // 체크 상태일 때 /uiux로 이동
+    navigatePage() {
+      if (this.isChecked) {
+        // 스위치가 체크된 상태일 때 /uiux로 이동
         this.$router.push('/uiux');
       } else {
-        // 체크 해제 상태일 때 기본 화면으로 이동
+        // 스위치가 체크 해제된 상태일 때 기본 화면으로 이동
         this.$router.push('/');
       }
+    },
+  },
+  created() {
+    // 컴포넌트가 생성될 때 현재 라우터 경로를 기반으로 스위치 상태 초기화
+    this.isChecked = this.$route.path === '/uiux';
+  },
+  watch: {
+    // 라우터 경로가 변경될 때마다 스위치 상태를 업데이트
+    '$route.path'(newPath) {
+      this.isChecked = newPath === '/uiux';
     },
   },
 };
