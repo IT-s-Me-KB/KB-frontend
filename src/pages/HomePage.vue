@@ -253,7 +253,6 @@
 <script setup lang="ts">
 import TrendBanner from '@/components/TrendBanner.vue';
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
 
 const accountData = ref({
   accountType: '',
@@ -265,11 +264,10 @@ const fetchAccountData = async () => {
   const userDataString = localStorage.getItem('user');
   const userData = JSON.parse(userDataString);
   const userNum = userData.userNum;
-  console.log(userNum + 'ASDFASDF');
 
   try {
     const response = await fetch(
-      `http://localhost:8080/api/account?pageName=${userNum}`,
+      `http://localhost:8080/api/account?userNum=${userNum}`,
       {
         method: 'GET',
         headers: {
@@ -291,6 +289,7 @@ const fetchAccountData = async () => {
 
 // 예제 계좌 번호를 사용합니다.
 onMounted(() => {
+  console.log('onMounted 호출됨');
   fetchAccountData();
 });
 
