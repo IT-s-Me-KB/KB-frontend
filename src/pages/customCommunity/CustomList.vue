@@ -10,6 +10,12 @@ const errorMessage = ref(''); // 에러 메시지
 const isLoading = ref(false); // 로딩 상태
 const customs = ref([]); // 커스텀 커뮤니티 데이터
 const customDetail = ref([]);
+const truncatedPageName = (name) => {
+  if (name.length > 4) {
+    return name.substring(0, 4) + '..';
+  }
+  return name;
+};
 
 // 데이터 불러오기
 const fetchGetCustomPage = async () => {
@@ -55,16 +61,14 @@ onMounted(() => {
 
 <template>
   <div class="binBox"></div>
-  <div class="container">
-    <ReviewHeader />
-
-    <br /><br />
-    <div v-if="isLoading" class="loading-overlay">
-      <div class="spinner"></div>
-    </div>
+    <div class="container">
+      <ReviewHeader />
+    <div class="con">
+      <div v-if="isLoading" class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
     <div class="customList">
       <h2>커스텀 목록</h2>
-
       <div class="listGroup">
         <div
             class="list"
@@ -73,12 +77,13 @@ onMounted(() => {
             @click="navigateToDetailPage(custom.sharedID)"
         >
           <div class="image">
-            <img :src="getImageUrl(custom.imagePath)" alt="Custom Image" />
+            <img class="photo" :src="getImageUrl(custom.imagePath)" alt="Custom Image" />
           </div>
           <div class="text">
-            <h5>{{ custom.pageName }}</h5>
+            <h5>{{ truncatedPageName(custom.pageName) }}</h5>
             <p>❤️ {{ custom.heart }}</p>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -92,7 +97,7 @@ onMounted(() => {
 
 .binBox {
   width: 100%;
-  height: 100px;
+  height: 80px;
   background-color: #EEF4F9;
   position: fixed;
   top: 0;
@@ -115,6 +120,11 @@ onMounted(() => {
   height: 254px;
   object-fit: cover;
   border-radius: 8px; /* 모서리를 둥글게 */
+
+}
+.photo{
+  border: 2px solid #eaeaea;; /* 하얀색 테두리 추가 */
+  border-radius: 10px;
 }
 
 .text {

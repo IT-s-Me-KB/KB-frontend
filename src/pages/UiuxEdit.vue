@@ -108,6 +108,7 @@ export default {
   },
   data() {
     return {
+      fileName: null,
       pageID: null,
       isBottomSheetVisible: false,
       bottomSheetZIndex: 1, // 바텀 시트의 z-index 초기값
@@ -530,16 +531,34 @@ export default {
         const resizedImageData = resizedCanvas.toDataURL('image/jpeg');
 
         // 서버로 전송
-        await axios.post('/api/community/capture', {
+
+        const response = await axios.post('/api/community/capture', {
+
           sharedID: this.sharedID,
           imagePath: resizedImageData,
           userNum: this.userNum,
         });
-
+        this.fileName = response.data;
+        console.log(this.fileName);
+        await this.saveCustomPageData(this.fileName);
+        console.log("qq"+ response.data);
         alert('화면이 성공적으로 저장되었습니다!');
       } catch (error) {
         console.error('화면 캡쳐 요청 에러:', error);
         alert('화면을 저장하는 데 실패했습니다.');
+      }
+    },
+
+
+    async saveCustomPageData(fileName) {
+      const userDataString = localStorage.getItem("user");
+      const userData = JSON.parse(userDataString);
+      const userNum = userData.userNum;
+      try {
+          await axios.post(`/api/custom/fileUpload?fileName=${encodeURIComponent(fileName)}&userNum=${encodeURIComponent(userNum)}`);
+      } catch (error) {
+        console.error("파일명 생성 요청 에러:", error.response?.data || error.message);
+        alert("파일명을 저장하는 데 실패했습니다.");
       }
     },
   },

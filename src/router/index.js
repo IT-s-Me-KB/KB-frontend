@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router';
 import UIUX from '@/pages/UIUX.vue';
 import Trend from '@/pages/trend/Trend.vue';
@@ -18,6 +19,7 @@ import Quizpage from '@/pages/game/quizpage.vue';
 import Walkpage from '@/pages/game/walkpage.vue';
 import customerpage from '@/pages/game/customerpage.vue'
 import moneytree from '@/pages/game/moneytree.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,10 +79,10 @@ const router = createRouter({
       meta: { hideHeader: true },
     },
     {
-      path: '/detailPage',
-      name: 'detailPage',
+      path: "/detailPage/:sharedID",
+      name: "detailPage",
       component: DetailPage,
-      meta: { hideHeader: true, hideChatBot: true },
+      meta: { hideHeader: true , hideChatBot:true},
     },
     {
       path: '/customList',
@@ -89,13 +91,13 @@ const router = createRouter({
       meta: { hideHeader: true },
     },
 
-    // Trend and Business pages
     {
       path: '/trend',
       name: 'trend',
       component: Trend,
       meta: { hideHeader: true },
     },
+
     {
       path: '/chatbot',
       name: 'chatbot',
@@ -135,6 +137,7 @@ const router = createRouter({
       name: 'moneytreePage',
       component: moneytree,
     },
+
   ],
 });
 

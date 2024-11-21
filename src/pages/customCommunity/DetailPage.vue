@@ -1,63 +1,48 @@
 <template>
   <div class="binBox">
-
   </div>
   <div class="container">
     <!-- ReviewHeader 컴포넌트 삽입 (필요 시 추가) -->
     <ReviewHeader />
 
-    <br /><br />
-
-    <!-- 상세 헤더 섹션 -->
-    <div class="header">
-      <h2><b>{{ customDetail.pageName }}</b></h2>
-      <div class="right-section">
-        <i class="bi bi-heart-fill"></i>
-        <h5>{{ customDetail.heart }}</h5>
+    <div class="con">
+      <!-- 상세 헤더 섹션 -->
+      <div class="header">
+        <h2><b>{{ customDetail.pageName }}</b></h2>
+        <div class="right-section">
+          <i class="bi bi-heart-fill"></i>
+          <h5 class="heart">{{ customDetail.heart }}</h5>
+        </div>
       </div>
-    </div>
-    <br />
-    <!-- 상세 이미지 및 제목 섹션 -->
-    <div class="detail-section">
-      <div class="image">
-        <img :src="getImageUrl(customDetail.imagePath)" alt="Custom Image" />
+      <br />
+      <!-- 상세 이미지 및 제목 섹션 -->
+      <div class="detail-section">
+        <div class="image">
+          <img class="photo" :src="getImageUrl(customDetail.imagePath)" alt="Custom Image" />
+        </div>
       </div>
-    </div>
 
-    <br /><br />
+      <br /><br />
 
-    <!-- 리뷰 섹션 -->
-    <div class="reviewBox">
-      <h2 class="d-inline"><b>좋아요</b></h2>
-    </div>
+      <!-- 버튼 섹션 -->
+      <div class="btnBox">
+        <button class="btn" @click="setCustom">적용</button>
+        <button class="btn" :disabled="customDetail.isLiked" @click="toggleLike">
+          <i class="bi" :class="customDetail.isLiked ? 'bi-heart-fill' : 'bi-heart'"></i>
+        </button>
+      </div>
 
-    <div>
-      <!-- 좋아요 수 표시 -->
-      <div class="heartCount text-end">
-        <i class="d-inline bi bi-heart-fill"></i>
-        <h1 class="d-inline">{{ customDetail.heart }}</h1>
+      <!-- 로딩 인디케이터 -->
+      <div v-if="isLoading" class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- 에러 메시지 표시 -->
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
       </div>
       <br />
     </div>
-
-    <!-- 버튼 섹션 -->
-    <div class="btnBox">
-      <button class="btn">적용</button>
-      <button class="btn" :disabled="customDetail.isLiked" @click="toggleLike">
-        <i class="bi" :class="customDetail.isLiked ? 'bi-heart-fill' : 'bi-heart'"></i>
-      </button>
-    </div>
-
-    <!-- 로딩 인디케이터 -->
-    <div v-if="isLoading" class="loading-overlay">
-      <div class="spinner"></div>
-    </div>
-
-    <!-- 에러 메시지 표시 -->
-    <div v-if="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-    <br />
   </div>
 </template>
 
@@ -87,7 +72,47 @@ const getImageUrl = (imagePath) => {
   return imagePath ? `${baseUrl}/${imagePath}` : `${baseUrl}/images/default-image.jpeg`;
 };
 
-// 데이터 불러오기
+
+const setCustom = async () => {
+  const userDataString = localStorage.getItem("user");
+  const userData = JSON.parse(userDataString);
+  const userNum = userData.userNum;
+  const pageDataString = localStorage.getItem("customPageData");
+  const pageData = JSON.parse(pageDataString);
+
+  const shareID = parseInt(customDetail.value.sharedID, 10);
+  if (isNaN(shareID)) {
+    errorMessage.value = '유효하지 않은 공유 ID입니다.';
+    isLoading.value = false;
+    return;
+  }
+
+  isLoading.value = true;
+  errorMessage.value = '';
+
+  try {
+    const response = await axios.get(`/api/community/page/download?shareID=${encodeURIComponent(shareID)}`);
+    const tempData = response.data;
+    const uploadData = {
+      userNum: userNum,
+      pageID: pageData.pageID,
+      layoutData: tempData.layoutData,
+      imagePath: tempData.imagePath
+    };
+
+    const res = await axios.post(`/api/custom/page`, uploadData);
+    if (res && res.status === 200){
+      alert('적용이 완료 되었습니다');
+      router.push('/uiux'); // 라우터 경로을 기준으로 이동
+    }
+  } catch (error) {
+    console.error(error);
+    errorMessage.value = '작업 중 오류가 발생했습니다.';
+  } finally {
+    isLoading.value = false;
+  }
+};
+
 const fetchCustomDetail = async () => {
   isLoading.value = true;
   errorMessage.value = '';
@@ -148,9 +173,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.photo{
+  box-shadow: 1px 1px 1px 1px #b9b9b9;
+
+}
+
 /* 컨테이너 스타일 */
 .container {
-  padding: 60px 40px 20px;
+  padding-top: 60px;
   font-family: Arial, sans-serif;
   position: relative;
 }
@@ -161,7 +191,9 @@ onMounted(() => {
   font-weight: bold;
   margin-top: 20px;
 }
-
+.heart{
+  font-size: 20px;
+}
 /* 헤더 스타일 */
 .header {
   display: flex;
@@ -182,10 +214,12 @@ onMounted(() => {
   align-items: center;
   gap: 5px; /* 아이콘과 숫자 간 간격 */
 }
-
+.con{
+  padding: 20px;
+}
 /* 아이콘 스타일 */
 .right-section .bi {
-  font-size: 24px; /* 아이콘 크기 조정 */
+  font-size: 27px; /* 아이콘 크기 조정 */
   color: #ff5a5f; /* 하트 아이콘 색상 */
 }
 
@@ -197,7 +231,7 @@ onMounted(() => {
 /* 숫자 스타일 */
 .right-section h5 {
   margin: 0;
-  font-size: 18px;
+  font-size: 26px;
 }
 
 .texts h2 {
@@ -223,18 +257,19 @@ onMounted(() => {
 /* 상세 섹션 스타일 */
 .detail-section {
   display: flex;
-  gap: 20px;
   align-items: center;
 }
 
 .detail-section .image {
-  max-width: 200px;
+  max-width: 230px;
+  margin-left: 30px;
 }
 
 .detail-section .image img {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  border: 1px solid #eef4f9;
 }
 
 .detail-section .text {
@@ -310,7 +345,7 @@ onMounted(() => {
 
 .spinner {
   border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
+  border-top: 8px solid #cca40d;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -337,7 +372,7 @@ onMounted(() => {
 
 .binBox {
   width: 100%;
-  height: 100px;
+  height: 80px;
   background-color: #EEF4F9;
   position: fixed;
   top: 0;

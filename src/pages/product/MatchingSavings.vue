@@ -137,7 +137,7 @@ onMounted(() => {
         :autoplay="{ delay: 3000, disableOnInteraction: false }"
         class="product-swiper"
         loop
-        :style="{ height: '220px' }"
+        :style="{ height: '250px' }"
     >
       <swiper-slide
           v-for="product in keywordProducts"
@@ -210,10 +210,12 @@ onMounted(() => {
   text-align: center;
   color: red;
 }
-.cc{
+.cc {
   width: 100px;
   margin-top: -100px;
+  opacity: 0.5; /* 투명도 50% 적용 */
 }
+
 .news-container {
   display: flex;
   align-items: flex-start; /* 아이콘과 텍스트의 세로 정렬 */
