@@ -9,7 +9,7 @@
       <div class="currency-details">
         <span class="currency-name">미국 USD</span>
         <span class="currency-rate">
-          {{ exchangeRate ? exchangeRate.toFixed(2) : "Loading..." }}
+          {{ '1,400.40' }}
         </span>
       </div>
     </div>
@@ -22,30 +22,30 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "ExchangeRateWidget",
+  name: 'ExchangeRateWidget',
   data() {
     return {
       exchangeRate: null, // 환율 정보를 저장할 데이터
     };
   },
   methods: {
-    async fetchExchangeRate(countryCode = "USD") {
+    async fetchExchangeRate(countryCode = 'USD') {
       try {
         const url = `/api/exchange-rate?currency=${countryCode}`;
-        console.log("Requesting URL:", url); // 요청 URL 확인
+        console.log('Requesting URL:', url); // 요청 URL 확인
         const response = await axios.get(url);
-        console.log("API Response:", response.data); // 응답 데이터 확인
+        console.log('API Response:', response.data); // 응답 데이터 확인
         this.exchangeRate = response.data.exchangeRate;
       } catch (error) {
-        console.error("환율 정보를 가져오는 중 오류 발생:", error);
+        console.error('환율 정보를 가져오는 중 오류 발생:', error);
         this.exchangeRate = null; // 오류 시 기본값 설정
       }
     },
     goToChargePage() {
-      this.$router.push("/charge"); // 충전 페이지로 이동
+      this.$router.push('/charge'); // 충전 페이지로 이동
     },
   },
   mounted() {

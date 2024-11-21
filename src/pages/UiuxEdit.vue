@@ -1,5 +1,4 @@
 <template>
-
   <div class="main-page" ref="captureArea">
     <!-- 새로운 상자 -->
     <div class="plus-box2" @click="saveWidgetPositions">
@@ -41,7 +40,7 @@
               :key="optionIndex"
               @click="addWidget(option)"
             >
-              {{ option.displayName }}
+              <img :src="option.image" alt="point icon" class="point-icon" />
             </p>
           </div>
           <hr class="feature-divider" />
@@ -90,6 +89,20 @@ import point1x1 from '../components/features/point1x1.vue';
 import quiz1x1 from '../components/features/quiz1x1.vue';
 import walk1x1 from '../components/features/walk1x1.vue';
 import moneytree1x2 from '../components/features/moneytree1x2.vue';
+import Transfer from '../components/features/Transfer.vue';
+import accountImage1 from '/images/account1x1.png';
+import accountImage2 from '/images/account1x2.png';
+import accountImage3 from '/images/account2x4.png';
+import exchangeImage1 from '/images/exchange1x1.png';
+import exchangeImage2 from '/images/exchange1x2.png';
+import exchangeImage3 from '/images/exchange2x2.png';
+import transferImage from '/images/transfer.png';
+import gameImage from '/images/game.png';
+import customerImage from '/images/customer.png';
+import pointImage from '/images/point.png';
+import quizImage from '/images/quiz.png';
+import walkImage from '/images/walk.png';
+import moneytreeImage from '/images/moneytree.png';
 
 export default {
   name: 'UiuxEdit',
@@ -106,6 +119,7 @@ export default {
     quiz1x1,
     walk1x1,
     moneytree1x2,
+    Transfer,
   },
   data() {
     return {
@@ -122,24 +136,24 @@ export default {
           options: [
             {
               id: '1',
-              displayName: '1x1',
               component: 'Account1x1',
               height: 100,
               width: 90,
+              image: accountImage1,
             },
             {
               id: '2',
-              displayName: '1x2',
               component: 'Account1x2',
               height: 100,
               width: 180,
+              image: accountImage2,
             },
             {
               id: '3',
-              displayName: '2x4',
               component: 'Account2x4',
               height: 200,
               width: 360,
+              image: accountImage3,
             },
           ],
         },
@@ -149,24 +163,37 @@ export default {
           options: [
             {
               id: '4',
-              displayName: '1x1',
               component: 'Exchange1x1',
               height: 100,
               width: 90,
+              image: exchangeImage1,
             },
             {
               id: '5',
-              displayName: '1x2',
               component: 'Exchange1x2',
               height: 100,
               width: 180,
+              image: exchangeImage2,
             },
             {
               id: '6',
-              displayName: '2x2',
               component: 'Exchange2x2',
               height: 200,
               width: 180,
+              image: exchangeImage3,
+            },
+          ],
+        },
+        {
+          name: '간편 송금',
+          isDropdownOpen: false,
+          options: [
+            {
+              id: '13',
+              component: 'Transfer',
+              height: 200,
+              width: 360,
+              image: transferImage,
             },
           ],
         },
@@ -176,10 +203,10 @@ export default {
           options: [
             {
               id: '7',
-              displayName: '1x1',
               component: 'Game1x1',
               height: 100,
               width: 90,
+              image: gameImage,
             },
           ],
         },
@@ -189,10 +216,10 @@ export default {
           options: [
             {
               id: '8',
-              displayName: '1x1',
               component: 'customer1x1',
               height: 100,
               width: 90,
+              image: customerImage,
             },
           ],
         },
@@ -202,10 +229,10 @@ export default {
           options: [
             {
               id: '9',
-              displayName: '1x1',
               component: 'point1x1',
               height: 100,
               width: 90,
+              image: pointImage,
             },
           ],
         },
@@ -215,10 +242,10 @@ export default {
           options: [
             {
               id: '10',
-              displayName: '1x1',
               component: 'quiz1x1',
               height: 100,
               width: 90,
+              image: quizImage,
             },
           ],
         },
@@ -228,10 +255,10 @@ export default {
           options: [
             {
               id: '11',
-              displayName: '1x1',
               component: 'walk1x1',
               height: 100,
               width: 90,
+              image: walkImage,
             },
           ],
         },
@@ -241,10 +268,10 @@ export default {
           options: [
             {
               id: '12',
-              displayName: '1x2',
               component: 'moneytree1x2',
               height: 100,
               width: 180,
+              image: moneytreeImage,
             },
           ],
         },
@@ -747,5 +774,4 @@ export default {
   gap: 0;
   position: relative;
 }
-
 </style>

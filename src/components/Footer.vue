@@ -4,7 +4,7 @@
     <div class="navbar">
       <router-link to="/" class="nav-item home" exact-active-class="active">
         <i class="fa-solid fa-file-invoice"></i>
-        <span>전체계좌</span>
+        <span>홈</span>
       </router-link>
       <router-link
         to="/trend"
@@ -44,8 +44,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const isChatOpen = ref(false);
 
@@ -57,17 +57,16 @@ const route = useRoute();
 
 const isActive = (path) => {
   // 'trend' 경로가 활성화되는 조건
-  if (path === "trend") {
+  if (path === 'trend') {
     return (
-      route.path === "/trend" || // 경로가 /trend일 때
-      (route.path === "/matchingProducts" &&
+      route.path === '/trend' || // 경로가 /trend일 때
+      (route.path === '/matchingProducts' &&
         route.query.group &&
         route.query.keyword) || // /matchingProducts에서 group과 keyword가 있을 때
-      (route.path === "/loading" && route.query.group && route.query.keyword)  ||
-          route.path === "/matchingSavings" ||
-          route.path === "searchResult"
-
-     );
+      (route.path === '/loading' && route.query.group && route.query.keyword) ||
+      route.path === '/matchingSavings' ||
+      route.path === 'searchResult'
+    );
   }
   return route.path === path;
 };
@@ -75,9 +74,9 @@ const isActive = (path) => {
 
 <style scoped>
 @font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -88,7 +87,7 @@ label,
 button,
 input,
 span {
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
 }
 
 .navbar {
