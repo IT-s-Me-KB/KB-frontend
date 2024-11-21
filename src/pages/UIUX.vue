@@ -33,6 +33,7 @@ import point1x1 from '@/components/features/point1x1.vue';
 import quiz1x1 from '@/components/features/quiz1x1.vue';
 import walk1x1 from '@/components/features/walk1x1.vue';
 import moneytree1x2 from '@/components/features/moneytree1x2.vue';
+import Transfer from '../components/features/Transfer.vue';
 export default {
   name: 'UiUx',
   components: {
@@ -47,8 +48,8 @@ export default {
     point1x1,
     quiz1x1,
     walk1x1,
-    moneytree1x2
-
+    moneytree1x2,
+    Transfer,
   },
   data() {
     return {
@@ -61,49 +62,59 @@ export default {
           name: '계좌 조회',
           isDropdownOpen: false,
           options: [
-            { id: '1', displayName: '1x1', component: 'Account1x1' },
-            { id: '2', displayName: '1x2', component: 'Account1x2' },
-            { id: '3', displayName: '2x4', component: 'Account2x4' },
+            { id: '1', component: 'Account1x1' },
+            { id: '2', component: 'Account1x2' },
+            { id: '3', component: 'Account2x4' },
           ],
         },
         {
           name: '환율 조회',
           isDropdownOpen: false,
           options: [
-            { id: '4', displayName: '1x1', component: 'Exchange1x1' },
-            { id: '5', displayName: '1x2', component: 'Exchange1x2' },
-            { id: '6', displayName: '2x2', component: 'Exchange2x2' },
+            { id: '4', component: 'Exchange1x1' },
+            { id: '5', component: 'Exchange1x2' },
+            { id: '6', component: 'Exchange2x2' },
           ],
         },
         {
           name: '참참참 게임',
           isDropdownOpen: false,
-          options: [{ id: '7', displayName: '1x1', component: 'Game1x1' }],
+          options: [{ id: '7', component: 'Game1x1' }],
         },
         {
           name: '금융 상담',
           isDropdownOpen: false,
-          options: [{ id: '8', displayName: '1x1', component: 'customer1x1' }],
+          options: [{ id: '8', component: 'customer1x1' }],
         },
         {
           name: '용돈 받기',
           isDropdownOpen: false,
-          options: [{ id: '9', displayName: '1x1', component: 'quiz1x1' }],
+          options: [{ id: '9', component: 'quiz1x1' }],
         },
         {
           name: '퀴즈 풀기',
           isDropdownOpen: false,
-          options: [{ id: '10', displayName: '1x1', component: 'quiz1x1' }],
+          options: [{ id: '10', component: 'quiz1x1' }],
         },
         {
           name: '매일 걷기',
           isDropdownOpen: false,
-          options: [{ id: '11', displayName: '1x1', component: 'walk1x1' }],
+          options: [{ id: '11', component: 'walk1x1' }],
         },
         {
           name: '머니트리 키우기',
           isDropdownOpen: false,
-          options: [{ id: '12', displayName: '1x2', component: 'moneytree1x2' }],
+          options: [{ id: '12', component: 'moneytree1x2' }],
+        },
+        {
+          name: '간편 송금',
+          isDropdownOpen: false,
+          options: [
+            {
+              id: '13',
+              component: 'Transfer',
+            },
+          ],
         },
       ], // 기능 목록
       dragIndex: null, // 현재 드래그 중인 위젯 인덱스

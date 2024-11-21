@@ -16,12 +16,21 @@ export default {
   },
   methods: {
     showDetails() {
-      // Click action for the widget: Redirect to gamePage
-      this.$router.push('/game'); 
+      // Check parent component name
+      const parentName = this.$parent?.$options?.name;
+
+      if (parentName === 'UiuxEdit.vue') {
+        console.log('Click event blocked in Edit.vue');
+        // Do nothing (click is blocked)
+        return;
+      } else if (parentName === 'UIUX.vue') {
+        console.log('Navigating to game page');
+        // Allow navigation
+        this.$router.push('/game');
+      }
     },
   },
 };
-
 </script>
 
 <style scoped>

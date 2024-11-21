@@ -8,10 +8,10 @@
       <div class="input-group">
         <label for="recipient">송금할 계좌 입력</label>
         <input
-            type="number"
-            v-model="recipient"
-            id="recipient"
-            placeholder="계좌번호를 입력하세요"
+          type="number"
+          v-model="recipient"
+          id="recipient"
+          placeholder="계좌번호를 입력하세요"
         />
       </div>
 
@@ -19,10 +19,10 @@
       <div class="input-group">
         <label for="balance">보낼 금액</label>
         <input
-            type="number"
-            v-model="balance"
-            id="balance"
-            placeholder="금액을 입력하세요"
+          type="number"
+          v-model="balance"
+          id="balance"
+          placeholder="금액을 입력하세요"
         />
       </div>
 
@@ -59,13 +59,16 @@ export default {
             balance: this.balance, // 송금 금액
           };
 
-          const response = await fetch('http://localhost:8080/api/account/transfer', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(accountDTO),
-          });
+          const response = await fetch(
+            'http://localhost:8080/api/account/transfer',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(accountDTO),
+            }
+          );
 
           if (!response.ok) {
             throw new Error('송금 실패: ' + response.statusText);
@@ -88,7 +91,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .remittance-widget {
   border-radius: 8px;
@@ -110,7 +112,7 @@ export default {
 
 .header {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: -10px;
 }
 
 .header p {
