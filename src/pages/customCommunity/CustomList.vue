@@ -62,7 +62,6 @@ onMounted(() => {
 <template>
   <div class="binBox"></div>
     <div class="container">
-      <ReviewHeader />
     <div class="con">
       <div v-if="isLoading" class="loading-overlay">
         <div class="spinner"></div>

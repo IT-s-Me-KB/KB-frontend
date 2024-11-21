@@ -23,12 +23,12 @@
         <span>자산관리</span>
       </router-link>
       <router-link
-        to="/accountbook"
+        to="/customCommunity"
         class="nav-item account-book"
         exact-active-class="active"
       >
         <i class="fa-solid fa-gift"></i>
-        <span>혜택</span>
+        <span>테마스토어</span>
       </router-link>
     </div>
 

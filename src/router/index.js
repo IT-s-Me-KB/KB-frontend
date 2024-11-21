@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router';
 import UIUX from '@/pages/UIUX.vue';
 import Trend from '@/pages/trend/Trend.vue';
@@ -17,55 +18,46 @@ import GamePage from '@/pages/game/gamepage.vue';
 import Pointpage from '@/pages/game/pointpage.vue';
 import Quizpage from '@/pages/game/quizpage.vue';
 import Walkpage from '@/pages/game/walkpage.vue';
-import customerpage from '@/pages/game/customerpage.vue';
+import customerpage from '@/pages/game/customerpage.vue'
 import moneytree from '@/pages/game/moneytree.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
-    { path: '/start', name: 'StartPage', component: StartPage },
-    {
-      path: '/trend',
-      name: 'trend',
-      component: Trend,
-      meta: { hideHeader: true },
-    },
-    {
-      path: '/searchResult',
-      name: 'searchResult',
-      component: SearchResult,
-      meta: { hideHeader: true },
-    },
+    { path: '/', name: 'homepage', component: HomePage },
+
+    // Product-related routes
     {
       path: '/loading',
       name: 'loading',
       component: Loading,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
     {
       path: '/savingLoading',
       name: 'savingLoading',
       component: SavingLoading,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
     {
       path: '/matchingProducts',
       name: 'matchingProducts',
       component: MatchingProducts,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
     {
       path: '/matchingSavings',
       name: 'matchingSavings',
       component: MatchingSavings,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
     {
       path: '/searchResult',
       name: 'searchResult',
       component: SearchResult,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
 
     // UI/UX pages
@@ -79,25 +71,20 @@ const router = createRouter({
       path: '/uiuxedit',
       name: 'UiuxEdit',
       component: UiuxEdit,
-      meta: { hideChatBot: true },
+      meta: { hideChatBot: true,hideHeader: true, hideArrow:true  },
     },
 
-    {
-      path: '/chatbot',
-      name: 'chatbot',
-      component: ChatBot,
-    },
     {
       path: '/customCommunity',
       name: 'customCommunity',
       component: CustomCommunity,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
     {
-      path: '/detailPage/:sharedID',
-      name: 'detailPage',
+      path: "/detailPage/:sharedID",
+      name: "detailPage",
       component: DetailPage,
-      meta: { hideHeader: true, hideChatBot: true },
+      meta: { hideHeader: true , hideChatBot:true, hideArrow:true},
     },
     {
       path: '/',
@@ -108,14 +95,14 @@ const router = createRouter({
       path: '/customList',
       name: 'customList',
       component: CustomList,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
 
     {
       path: '/trend',
       name: 'trend',
       component: Trend,
-      meta: { hideHeader: true },
+      meta: { hideHeader: true, hideArrow:true },
     },
 
     {
@@ -123,11 +110,15 @@ const router = createRouter({
       name: 'chatbot',
       component: ChatBot,
     },
+
+    // Game page
     {
       path: '/game',
       name: 'GamePage',
       component: GamePage,
     },
+
+    // Feature components
     {
       path: '/customer',
       name: 'customerpage',
@@ -153,6 +144,7 @@ const router = createRouter({
       name: 'moneytreePage',
       component: moneytree,
     },
+
   ],
 });
 

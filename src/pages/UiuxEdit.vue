@@ -1,4 +1,5 @@
 <template>
+
   <div class="main-page" ref="captureArea">
     <!-- 새로운 상자 -->
     <div class="plus-box2" @click="saveWidgetPositions">
@@ -746,4 +747,5 @@ export default {
   gap: 0;
   position: relative;
 }
+
 </style>
