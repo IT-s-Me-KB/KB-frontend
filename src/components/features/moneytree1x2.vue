@@ -17,11 +17,10 @@ export default {
   methods: {
     showDetails() {
       // Click action for the widget: Redirect to gamePage
-      this.$router.push('/moneytree'); 
+      this.$router.push('/moneytree');
     },
   },
 };
-
 </script>
 
 <style scoped>

@@ -1,11 +1,9 @@
 <template>
-  <div class="binBox">
-
-  </div>
+  <div class="binBox"></div>
   <div class="main-page">
-    <br>
+    <br />
     <!-- 상단 계좌 -->
-    <TrendBanner/><br>
+    <TrendBanner /><br />
     <div class="header-section">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -22,7 +20,9 @@
       </div>
       <br />
       <br />
-      <div class="balance-amount">{{ formatCurrency(accountData.balance) }}</div>
+      <div class="balance-amount">
+        {{ formatCurrency(accountData.balance) }}
+      </div>
       <button class="transfer-button">출금계좌등록</button>
     </div>
 
@@ -59,7 +59,7 @@
 <style scoped>
 /* Main Page */
 .main-page {
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   padding: 5px;
   width: 360px;
   margin-top: 60px;
@@ -209,7 +209,7 @@
 }
 
 .word {
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   color: #515254;
   font-size: 16px;
   text-align: center;
@@ -244,48 +244,57 @@
 .binBox {
   width: 100%;
   height: 60px;
-  background-color: #EEF4F9; /* 필요한 경우 배경색 추가 */
+  background-color: #eef4f9; /* 필요한 경우 배경색 추가 */
   position: fixed;
   top: 0;
   z-index: 100;
 }
 </style>
 <script setup lang="ts">
-import TrendBanner from "@/components/TrendBanner.vue";
-import { ref, onMounted } from "vue";
+import TrendBanner from '@/components/TrendBanner.vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
 const accountData = ref({
   accountType: '',
   accountNumber: '',
   balance: 0,
 });
 
-const fetchAccountData = async (accountNumber: number) => {
+const fetchAccountData = async () => {
+  const userDataString = localStorage.getItem('user');
+  const userData = JSON.parse(userDataString);
+  const userNum = userData.userNum;
+  console.log(userNum + 'ASDFASDF');
+
   try {
-    const response = await fetch(`http://localhost:8080/api/account/${accountNumber}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:8080/api/account?pageName=${userNum}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     if (response.ok) {
       accountData.value = await response.json();
       console.log(accountData.value);
     } else {
-      console.error("계좌 정보를 가져오는 데 실패했습니다.");
+      console.error('계좌 정보를 가져오는 데 실패했습니다.');
     }
   } catch (error) {
-    console.error("오류 발생:", error);
+    console.error('오류 발생:', error);
   }
 };
 
 // 예제 계좌 번호를 사용합니다.
 onMounted(() => {
-  fetchAccountData(33333322111111);
+  fetchAccountData();
 });
 
 const formatCurrency = (value: number) => {
-  return value.toLocaleString("ko-KR") + "원";
+  return value.toLocaleString('ko-KR') + '원';
 };
-
 </script>
