@@ -12,25 +12,20 @@ import SavingLoading from '@/pages/product/SavingLoading.vue';
 import HomePage from '@/pages/HomePage.vue';
 import CustomList from '@/pages/customCommunity/CustomList.vue';
 import SearchResult from '@/pages/product/SearchResult.vue';
-import GamePage from '@/pages/game/Gamepage.vue';
+import GamePage from '@/pages/game/gamepage.vue';
+import Pointpage from '@/pages/game/pointpage.vue';
+import Quizpage from '@/pages/game/quizpage.vue';
+import Walkpage from '@/pages/game/walkpage.vue';
+import customerpage from '@/pages/game/customerpage.vue'
+import moneytree from '@/pages/game/moneytree.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
     { path: '/', name: 'homepage', component: HomePage },
-    {
-      path: '/trend',
-      name: 'trend',
-      component: Trend,
-      meta: { hideHeader: true },
-    },
-    {
-      path: '/searchResult',
-      name: 'searchResult',
-      component: SearchResult,
-      meta: { hideHeader: true },
-    },
+
+    // Product-related routes
     {
       path: '/loading',
       name: 'loading',
@@ -56,6 +51,14 @@ const router = createRouter({
       meta: { hideHeader: true },
     },
     {
+      path: '/searchResult',
+      name: 'searchResult',
+      component: SearchResult,
+      meta: { hideHeader: true },
+    },
+
+    // UI/UX pages
+    {
       path: '/uiux',
       name: 'UiUx',
       component: UIUX,
@@ -66,11 +69,7 @@ const router = createRouter({
       component: UiuxEdit,
     },
 
-    {
-      path: '/chatbot',
-      name: 'chatbot',
-      component: ChatBot,
-    },
+    // Community-related pages
     {
       path: '/customCommunity',
       name: 'customCommunity',
@@ -84,20 +83,57 @@ const router = createRouter({
       meta: { hideHeader: true, hideChatBot: true },
     },
     {
-      path: '/',
-      name: 'homepage',
-      component: HomePage,
-    },
-    {
       path: '/customList',
       name: 'customList',
       component: CustomList,
       meta: { hideHeader: true },
     },
+
+    // Trend and Business pages
+    {
+      path: '/trend',
+      name: 'trend',
+      component: Trend,
+      meta: { hideHeader: true },
+    },
+    {
+      path: '/chatbot',
+      name: 'chatbot',
+      component: ChatBot,
+    },
+
+    // Game page
     {
       path: '/game',
       name: 'GamePage',
-      component: GamePage, // GamePage 컴포넌트로 연결
+      component: GamePage,
+    },
+
+    // Feature components
+    {
+      path: '/customer',
+      name: 'customerpage',
+      component: customerpage,
+    },
+    {
+      path: '/point',
+      name: 'pointPage',
+      component: Pointpage,
+    },
+    {
+      path: '/quiz',
+      name: 'quizPage',
+      component: Quizpage,
+    },
+    {
+      path: '/walk',
+      name: 'walkPage',
+      component: Walkpage,
+    },
+    {
+      path: '/moneytree',
+      name: 'moneytreePage',
+      component: moneytree,
     },
   ],
 });

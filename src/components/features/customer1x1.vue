@@ -1,23 +1,23 @@
 <template>
   <div class="widget-container" @click="showDetails">
-    <img :src="gameImage" alt="game icon" class="game-icon" />
+    <img :src="customerImage" alt="customer icon" class="customer-icon" />
   </div>
 </template>
 
 <script>
-import gameImage from '/images/game.png'; // Adjust the path according to your actual file location
+import customerImage from '/images/customer.png'; 
 
 export default {
   name: 'Widget',
   data() {
     return {
-      gameImage, // Imported image
+      customerImage, // Imported image
     };
   },
   methods: {
     showDetails() {
-      // Click action for the widget: Redirect to gamePage
-      this.$router.push('/game'); 
+      
+      this.$router.push('/customer'); 
     },
   },
 };
@@ -39,7 +39,7 @@ export default {
   background: none; /* 배경색 제거 */
 }
 
-.game-icon {
+.customer-icon {
   width: 100%;
   height: 100%;
   object-fit: cover; /* 이미지가 꽉 차도록 조정하며 비율 유지 */

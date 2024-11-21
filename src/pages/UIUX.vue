@@ -20,13 +20,18 @@
 
 <script>
 import { getCustomPage, saveCustomPage } from '../api/customAPI';
-import Account1x1 from '../components/features/Account 1x1.vue';
-import Account1x2 from '../components/features/Account 1x2.vue';
-import Account2x4 from '../components/features/Account 2x4.vue';
-import Exchange1x1 from '../components/features/Exchange 1x1.vue';
-import Exchange1x2 from '../components/features/Exchange 1x2.vue';
-import Exchange2x2 from '../components/features/Exchange 2x2.vue';
-import Game1x1 from '../components/features/game1x1.vue';
+import Account1x1 from '@/components/features/Account 1x1.vue';
+import Account1x2 from '@/components/features/Account 1x2.vue';
+import Account2x4 from '@/components/features/Account 2x4.vue';
+import Exchange1x1 from '@/components/features/Exchange 1x1.vue';
+import Exchange1x2 from '@/components/features/Exchange 1x2.vue';
+import Exchange2x2 from '@/components/features/Exchange 2x2.vue';
+import Game1x1 from '@/components/features/game1x1.vue';
+import customer1x1 from '@/components/features/customer1x1.vue';
+import point1x1 from '@/components/features/point1x1.vue';
+import quiz1x1 from '@/components/features/quiz1x1.vue';
+import walk1x1 from '@/components/features/walk1x1.vue';
+import moneytree1x2 from '@/components/features/moneytree1x2.vue';
 export default {
   name: 'UiUx',
   components: {
@@ -37,6 +42,12 @@ export default {
     Exchange1x2,
     Exchange2x2,
     Game1x1,
+    customer1x1,
+    point1x1,
+    quiz1x1,
+    walk1x1,
+    moneytree1x2
+
   },
   data() {
     return {
@@ -67,6 +78,31 @@ export default {
           name: '참참참 게임',
           isDropdownOpen: false,
           options: [{ id: '7', displayName: '1x1', component: 'Game1x1' }],
+        },
+        {
+          name: '금융 상담',
+          isDropdownOpen: false,
+          options: [{ id: '8', displayName: '1x1', component: 'customer1x1' }],
+        },
+        {
+          name: '용돈 받기',
+          isDropdownOpen: false,
+          options: [{ id: '9', displayName: '1x1', component: 'quiz1x1' }],
+        },
+        {
+          name: '퀴즈 풀기',
+          isDropdownOpen: false,
+          options: [{ id: '10', displayName: '1x1', component: 'quiz1x1' }],
+        },
+        {
+          name: '매일 걷기',
+          isDropdownOpen: false,
+          options: [{ id: '11', displayName: '1x1', component: 'walk1x1' }],
+        },
+        {
+          name: '머니트리 키우기',
+          isDropdownOpen: false,
+          options: [{ id: '12', displayName: '1x2', component: 'moneytree1x2' }],
         },
       ], // 기능 목록
       dragIndex: null, // 현재 드래그 중인 위젯 인덱스
