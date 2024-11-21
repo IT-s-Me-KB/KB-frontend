@@ -254,10 +254,9 @@
 import TrendBanner from "@/components/TrendBanner.vue";
 import { ref, onMounted } from "vue";
 const accountData = ref({
-  accountType:'',
-  accountNumber:'',
-  balance:0,
-
+  accountType: '',
+  accountNumber: '',
+  balance: 0,
 });
 
 const fetchAccountData = async (accountNumber: number) => {

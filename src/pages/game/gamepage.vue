@@ -2,7 +2,7 @@
   <div class="game-page">
     <!-- 닫기 버튼 -->
     <button class="close-button" @click="closePage">x</button>
-    
+
     <!-- 게임 이미지 -->
     <img :src="gameImage" alt="Game Image" class="game-image" />
   </div>
@@ -29,7 +29,6 @@ export default {
 
 <style scoped>
 .game-page {
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +51,7 @@ export default {
 }
 
 .game-image {
-  margin-top:60px;
+  margin-top: 60px;
   width: 100%; /* 이미지를 양옆을 꽉 채우도록 설정 */
   height: auto; /* 이미지 비율을 유지하면서 높이 자동 조정 */
   object-fit: cover; /* 이미지가 컨테이너의 너비를 채우도록 설정 */
