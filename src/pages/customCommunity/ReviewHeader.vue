@@ -6,7 +6,7 @@ const router = useRouter();
 
 // 뒤로 가기 함수
 const goBack = () => {
-  router.back(); // 이전 페이지로 이동
+  router.back();
 };
 </script>
 
@@ -20,7 +20,6 @@ const goBack = () => {
 .fixed-icon {
   font-family: Arial, sans-serif;
   position: fixed;
-  top: 50px;
   font-size: 24px;
   color: #333;
   z-index: 1000;

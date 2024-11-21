@@ -2,6 +2,7 @@
   <div class="header">
     <!-- 왼쪽 정렬: 간편홈과 토글 버튼 -->
     <div class="left-container">
+      <ReviewHeader v-if="$route.meta.hideArrow"/>
       <SimpleHome v-if="!$route.meta.hideHeader"/>
     </div>
     <!-- 오른쪽 정렬: 다른 버튼들 -->
@@ -16,10 +17,11 @@
 
 <script>
 import SimpleHome from "@/components/SimpleHome.vue";
+import ReviewHeader from "@/pages/customCommunity/ReviewHeader.vue";
 
 export default {
   name: 'Header',
-  components: {SimpleHome},
+  components: {ReviewHeader, SimpleHome},
 };
 </script>
 

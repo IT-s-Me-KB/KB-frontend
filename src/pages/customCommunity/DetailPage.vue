@@ -3,7 +3,6 @@
   </div>
   <div class="container">
     <!-- ReviewHeader 컴포넌트 삽입 (필요 시 추가) -->
-    <ReviewHeader />
 
     <div class="con">
       <!-- 상세 헤더 섹션 -->
@@ -261,7 +260,7 @@ onMounted(() => {
 }
 
 .detail-section .image {
-  max-width: 230px;
+  max-width: 220px;
   margin-left: 30px;
 }
 

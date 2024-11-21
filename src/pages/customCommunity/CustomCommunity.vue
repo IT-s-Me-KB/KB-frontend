@@ -1,7 +1,8 @@
 <template>
   <div class="container">
+    <br>
     <div class="conr">
-      <h3><b>커스텀 커뮤니티</b></h3>
+      <h3><b>테마 스토어</b></h3>
       <button @click="openShareModal">내 커스텀 공유하기</button>
     </div>
     <br />
