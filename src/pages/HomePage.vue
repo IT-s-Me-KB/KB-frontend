@@ -253,11 +253,10 @@
 <script setup lang="ts">
 import TrendBanner from "@/components/TrendBanner.vue";
 import { ref, onMounted } from "vue";
-import Transfer from "@/components/features/Transfer.vue";
 const accountData = ref({
   accountType:'',
   accountNumber:'',
-  balance:'',
+  balance:0,
 
 });
 

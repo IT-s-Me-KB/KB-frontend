@@ -1,21 +1,21 @@
 <template>
-  <div class="game-page">
+  <div class="moneytree-page">
     <!-- 닫기 버튼 -->
     <button class="close-button" @click="closePage">x</button>
     
     <!-- 게임 이미지 -->
-    <img :src="gameImage" alt="Game Image" class="game-image" />
+    <img :src="moneytreeImage" alt="moneytree Image" class="moneytree-image" />
   </div>
 </template>
 
 <script>
-import gameImage from '/images/gamepage.png'; // 실제 이미지 파일 경로로 수정
+import moneytreeImage from '/images/moneytreepage.png'; // 실제 이미지 파일 경로로 수정
 
 export default {
-  name: 'GamePage',
+  name: 'moneytreePage',
   data() {
     return {
-      gameImage, // 불러온 이미지 경로를 사용
+      moneytreeImage, // 불러온 이미지 경로를 사용
     };
   },
   methods: {
@@ -28,10 +28,8 @@ export default {
 </script>
 
 <style scoped>
-.game-page {
-  /* width: 90px; */
-  /* height: 98.125px; */
-  margin-top:40px;
+.moneytree-page {
+ 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +51,7 @@ export default {
   color: #333;
 }
 
-.game-image {
+.moneytree-image {
   max-width: 90%;
   max-height: 90%;
   object-fit: contain; /* 이미지를 비율에 맞춰 표시하며 전체 영역을 채웁니다 */
