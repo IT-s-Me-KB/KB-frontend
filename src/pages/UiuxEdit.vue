@@ -104,7 +104,7 @@ export default {
     point1x1,
     quiz1x1,
     walk1x1,
-    moneytree1x2
+    moneytree1x2,
   },
   data() {
     return {
@@ -181,8 +181,8 @@ export default {
               width: 90,
             },
           ],
-          
-        },  {
+        },
+        {
           name: '금융 상담',
           isDropdownOpen: false,
           options: [
@@ -194,8 +194,8 @@ export default {
               width: 90,
             },
           ],
-          
-        },  {
+        },
+        {
           name: '용돈 받기',
           isDropdownOpen: false,
           options: [
@@ -207,8 +207,8 @@ export default {
               width: 90,
             },
           ],
-          
-        },  {
+        },
+        {
           name: '퀴즈 풀기',
           isDropdownOpen: false,
           options: [
@@ -220,8 +220,8 @@ export default {
               width: 90,
             },
           ],
-          
-        },  {
+        },
+        {
           name: '매일 걷기',
           isDropdownOpen: false,
           options: [
@@ -233,8 +233,8 @@ export default {
               width: 90,
             },
           ],
-          
-        },  {
+        },
+        {
           name: '머니트리 키우기',
           isDropdownOpen: false,
           options: [
@@ -246,7 +246,6 @@ export default {
               width: 180,
             },
           ],
-          
         },
       ], // 기능 목록
       isDragging: false, // 드래그 상태 관리
@@ -365,11 +364,11 @@ export default {
         await this.captureAndSave();
 
         // API 응답에 따른 처리
-        alert('사용자 설정이 저장되었습니다: ' + response.message);
+        // alert('사용자 설정이 저장되었습니다: ' + response.message);
         this.$router.push('/uiux');
       } catch (error) {
         console.error('API 요청 실패:', error);
-        alert('저장에 실패했습니다. 다시 시도해주세요.');
+        // alert('저장에 실패했습니다. 다시 시도해주세요.');
       }
     },
 
@@ -533,32 +532,34 @@ export default {
         // 서버로 전송
 
         const response = await axios.post('/api/community/capture', {
-
           sharedID: this.sharedID,
           imagePath: resizedImageData,
           userNum: this.userNum,
         });
-        this.fileName = response.data;
-        console.log(this.fileName);
-        await this.saveCustomPageData(this.fileName);
-        console.log("qq"+ response.data);
-        alert('화면이 성공적으로 저장되었습니다!');
+
+        // alert('화면이 성공적으로 저장되었습니다!');
       } catch (error) {
         console.error('화면 캡쳐 요청 에러:', error);
-        alert('화면을 저장하는 데 실패했습니다.');
+        // alert('화면을 저장하는 데 실패했습니다.');
       }
     },
 
-
     async saveCustomPageData(fileName) {
-      const userDataString = localStorage.getItem("user");
+      const userDataString = localStorage.getItem('user');
       const userData = JSON.parse(userDataString);
       const userNum = userData.userNum;
       try {
-          await axios.post(`/api/custom/fileUpload?fileName=${encodeURIComponent(fileName)}&userNum=${encodeURIComponent(userNum)}`);
+        await axios.post(
+          `/api/custom/fileUpload?fileName=${encodeURIComponent(
+            fileName
+          )}&userNum=${encodeURIComponent(userNum)}`
+        );
       } catch (error) {
-        console.error("파일명 생성 요청 에러:", error.response?.data || error.message);
-        alert("파일명을 저장하는 데 실패했습니다.");
+        console.error(
+          '파일명 생성 요청 에러:',
+          error.response?.data || error.message
+        );
+        alert('파일명을 저장하는 데 실패했습니다.');
       }
     },
   },

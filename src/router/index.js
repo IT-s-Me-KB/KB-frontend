@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from 'vue-router';
 import UIUX from '@/pages/UIUX.vue';
 import Trend from '@/pages/trend/Trend.vue';
@@ -13,21 +12,31 @@ import SavingLoading from '@/pages/product/SavingLoading.vue';
 import HomePage from '@/pages/HomePage.vue';
 import CustomList from '@/pages/customCommunity/CustomList.vue';
 import SearchResult from '@/pages/product/SearchResult.vue';
+import StartPage from '@/pages/StartPage.vue';
 import GamePage from '@/pages/game/gamepage.vue';
 import Pointpage from '@/pages/game/pointpage.vue';
 import Quizpage from '@/pages/game/quizpage.vue';
 import Walkpage from '@/pages/game/walkpage.vue';
-import customerpage from '@/pages/game/customerpage.vue'
+import customerpage from '@/pages/game/customerpage.vue';
 import moneytree from '@/pages/game/moneytree.vue';
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
-    { path: '/', name: 'homepage', component: HomePage },
-
-    // Product-related routes
+    { path: '/start', name: 'StartPage', component: StartPage },
+    {
+      path: '/trend',
+      name: 'trend',
+      component: Trend,
+      meta: { hideHeader: true },
+    },
+    {
+      path: '/searchResult',
+      name: 'searchResult',
+      component: SearchResult,
+      meta: { hideHeader: true },
+    },
     {
       path: '/loading',
       name: 'loading',
@@ -64,14 +73,20 @@ const router = createRouter({
       path: '/uiux',
       name: 'UiUx',
       component: UIUX,
+      meta: { hideChatBot: true },
     },
     {
       path: '/uiuxedit',
       name: 'UiuxEdit',
       component: UiuxEdit,
+      meta: { hideChatBot: true },
     },
 
-    // Community-related pages
+    {
+      path: '/chatbot',
+      name: 'chatbot',
+      component: ChatBot,
+    },
     {
       path: '/customCommunity',
       name: 'customCommunity',
@@ -79,10 +94,15 @@ const router = createRouter({
       meta: { hideHeader: true },
     },
     {
-      path: "/detailPage/:sharedID",
-      name: "detailPage",
+      path: '/detailPage/:sharedID',
+      name: 'detailPage',
       component: DetailPage,
-      meta: { hideHeader: true , hideChatBot:true},
+      meta: { hideHeader: true, hideChatBot: true },
+    },
+    {
+      path: '/',
+      name: 'homepage',
+      component: HomePage,
     },
     {
       path: '/customList',
@@ -103,15 +123,11 @@ const router = createRouter({
       name: 'chatbot',
       component: ChatBot,
     },
-
-    // Game page
     {
       path: '/game',
       name: 'GamePage',
       component: GamePage,
     },
-
-    // Feature components
     {
       path: '/customer',
       name: 'customerpage',
@@ -137,7 +153,6 @@ const router = createRouter({
       name: 'moneytreePage',
       component: moneytree,
     },
-
   ],
 });
 
