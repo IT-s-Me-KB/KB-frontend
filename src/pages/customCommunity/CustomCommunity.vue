@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <br>
+    <br />
     <div class="conr">
       <h3><b>테마 스토어</b></h3>
       <button @click="openShareModal">내 커스텀 공유하기</button>
@@ -11,25 +11,34 @@
       <div v-if="isLoading" class="loading-overlay">
         <div class="spinner"></div>
       </div>
-      <h4 class="popular-title">이번주 인기 커스텀</h4><br>
+      <h4 class="popular-title">이번주 인기 커스텀</h4>
+      <br />
       <Swiper
-          :modules="[Autoplay]"
-          :autoplay="{ delay: 3000, disableOnInteraction: false }"
-          loop
-          class="product-swiper"
-          :slidesPerView="3">
+        :modules="[Autoplay]"
+        :autoplay="{ delay: 3000, disableOnInteraction: false }"
+        loop
+        class="product-swiper"
+        :slidesPerView="3"
+      >
         <SwiperSlide
-            v-for="custom in popularCustoms"
-            :key="custom.sharedID"
-            @click="navigateToDetailPage(custom.sharedID)"
+          v-for="custom in popularCustoms"
+          :key="custom.sharedID"
+          @click="navigateToDetailPage(custom.sharedID)"
         >
           <div class="content-item">
             <div class="image">
-              <img class="photo" :src="getImageUrl(custom.imagePath)" alt="Custom Image" />
+              <img
+                class="photo"
+                :src="getImageUrl(custom.imagePath)"
+                alt="Custom Image"
+              />
             </div>
             <div class="text">
-              <h5 class="d-inline page-name">{{ truncatedPageName(custom.pageName) }}</h5>
-              <p class="d-inline">❤️ {{ custom.heart }}</p> <!-- Heart 수 표시 -->
+              <h5 class="d-inline page-name">
+                {{ truncatedPageName(custom.pageName) }}
+              </h5>
+              <p class="d-inline">❤️ {{ custom.heart }}</p>
+              <!-- Heart 수 표시 -->
             </div>
           </div>
         </SwiperSlide>
@@ -45,24 +54,31 @@
         <h4 class="popular-title">커스텀 목록</h4>
         <i class="bi bi-chevron-right"></i>
       </div>
-      <br>
+      <br />
       <Swiper
-          :modules="[Autoplay]"
-          :autoplay="{ delay: 3000, disableOnInteraction: false }"
-          loop
-          class="product-swiper"
-          :slidesPerView="3">
+        :modules="[Autoplay]"
+        :autoplay="{ delay: 3000, disableOnInteraction: false }"
+        loop
+        class="product-swiper"
+        :slidesPerView="3"
+      >
         <SwiperSlide
-            v-for="custom in otherCustoms"
-            :key="custom.sharedID"
-            @click="navigateToDetailPage(custom.sharedID)"
-            class="content-item"
+          v-for="custom in otherCustoms"
+          :key="custom.sharedID"
+          @click="navigateToDetailPage(custom.sharedID)"
+          class="content-item"
         >
           <div class="image">
-            <img class="photo" :src="getImageUrl(custom.imagePath)" alt="Custom Image" />
+            <img
+              class="photo"
+              :src="getImageUrl(custom.imagePath)"
+              alt="Custom Image"
+            />
           </div>
           <div class="text">
-            <h5 class="d-inline page-name">{{ truncatedPageName(custom.pageName) }}</h5>
+            <h5 class="d-inline page-name">
+              {{ truncatedPageName(custom.pageName) }}
+            </h5>
             <p class="d-inline">❤️ {{ custom.heart }}</p>
           </div>
         </SwiperSlide>
@@ -71,22 +87,26 @@
   </div>
 
   <!-- 공유 모달 -->
-  <div v-if="showShareModal" class="modal-overlay" @click.self="closeShareModal">
+  <div
+    v-if="showShareModal"
+    class="modal-overlay"
+    @click.self="closeShareModal"
+  >
     <div class="modal-content">
       <span class="close-button" @click="closeShareModal">&times;</span>
       <h3>커스텀 공유하기</h3>
       <p>아래 옵션을 통해 커스텀을 공유하세요</p>
       <div class="share-options">
         <input
-            type="text"
-            v-model="pageName"
-            placeholder="제목을 입력하세요"
-            @keyup.enter="fetchShare"
+          type="text"
+          v-model="pageName"
+          placeholder="제목을 입력하세요"
+          @keyup.enter="fetchShare"
         />
         <button
-            @click="fetchShare"
-            :disabled="!pageName.trim()"
-            class="share-button"
+          @click="fetchShare"
+          :disabled="!pageName.trim()"
+          class="share-button"
         >
           공유하기
         </button>
@@ -121,8 +141,10 @@ const pageName = ref('');
 
 // 이미지 URL 생성 함수
 const getImageUrl = (imagePath) => {
-  const baseUrl = "http://localhost:8080";
-  return imagePath ? `${baseUrl}/${imagePath}` : `${baseUrl}/images/default-image.jpeg`;
+  const baseUrl = 'http://localhost:8080';
+  return imagePath
+    ? `${baseUrl}/${imagePath}`
+    : `${baseUrl}/images/default-image.jpeg`;
 };
 
 // 상태 관리
@@ -136,16 +158,12 @@ const showShareModal = ref(false);
 
 // 인기 커스텀 (heart 수 기준 내림차순 정렬 후 상위 3개)
 const popularCustoms = computed(() => {
-  return [...customs.value]
-      .sort((a, b) => b.heart - a.heart)
-      .slice(0, 3);
+  return [...customs.value].sort((a, b) => b.heart - a.heart).slice(0, 3);
 });
 
 // 기타 커스텀 (상위 3개 제외)
 const otherCustoms = computed(() => {
-  return [...customDetail.value]
-      .sort((a, b) => b.heart - a.heart)
-      .slice(3);
+  return [...customDetail.value].sort((a, b) => b.heart - a.heart).slice(3);
 });
 
 // 데이터 불러오기
@@ -173,13 +191,18 @@ const fetchShare = async () => {
   if (!pageName.value.trim()) {
     return;
   }
-  const pageDataString = localStorage.getItem("customPageData");
+  const pageDataString = localStorage.getItem('customPageData');
   const pageData = JSON.parse(pageDataString);
   console.log(pageData);
   isLoading.value = true;
   errorMessage.value = '';
   try {
-    const response = await axios.post(`/api/community/pages/share?pageName=${encodeURIComponent(pageName.value)}`, pageData)
+    const response = await axios.post(
+      `/api/community/pages/share?pageName=${encodeURIComponent(
+        pageName.value
+      )}`,
+      pageData
+    );
     if (response.status === 204) {
       shareSuccess.value = true;
       // 공유 성공 후 추가 동작 (예: 모달 닫기, 페이지 리프레시 등)
@@ -204,7 +227,7 @@ const openShareModal = () => {
 const closeShareModal = () => {
   showShareModal.value = false;
   shareSuccess.value = false; // 성공 메시지 초기화
-  shareError.value = false;   // 에러 메시지 초기화
+  shareError.value = false; // 에러 메시지 초기화
 };
 
 // 상세 페이지로 이동
@@ -219,7 +242,7 @@ const navigateToDetailPage = (id) => {
 // 커스텀 목록으로 이동
 const customList = () => {
   router.push(`/customList`);
-}
+};
 const truncatedPageName = (name) => {
   if (name.length > 4) {
     return name.substring(0, 4) + '..';
@@ -237,13 +260,13 @@ onMounted(() => {
 .conr {
   display: flex;
   justify-content: space-between; /* 요소들을 양 끝으로 배치 */
-  align-items: center;            /* 요소들을 수직으로 중앙 정렬 */
+  align-items: center; /* 요소들을 수직으로 중앙 정렬 */
 }
 
 button {
   font-size: 16px;
   border: none;
-  background-color: #FFCC00;
+  background-color: #ffcc00;
   padding: 10px;
   cursor: pointer;
   border-radius: 20px;
@@ -295,11 +318,10 @@ button {
 .content-item .image img {
   width: 72px;
   height: 114px;
-
 }
 
-.photo{
-  border: 2px solid #eaeaea;; /* 하얀색 테두리 추가 */
+.photo {
+  border: 2px solid #eaeaea; /* 하얀색 테두리 추가 */
   border-radius: 10px;
 }
 
@@ -382,7 +404,7 @@ button {
 
 .spinner {
   border: 8px solid #f3f3f3;
-  border-top: 8px solid #FFCC00; /* 스피너 색상 변경 */
+  border-top: 8px solid #ffcc00; /* 스피너 색상 변경 */
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -390,8 +412,12 @@ button {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 모달 스타일 */
@@ -444,14 +470,14 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #FFCC00; /* 버튼 배경색 변경 */
+  background-color: #ffcc00; /* 버튼 배경색 변경 */
   color: #fff;
   font-size: 1em;
   transition: background-color 0.3s, opacity 0.3s;
 }
 
 .share-options .share-button:hover:not(:disabled) {
-  background-color: #FFCC00; /* 호버 시 배경색 유지 */
+  background-color: #ffcc00; /* 호버 시 배경색 유지 */
 }
 
 .share-options .share-button:disabled {

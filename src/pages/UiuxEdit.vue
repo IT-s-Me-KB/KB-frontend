@@ -298,7 +298,7 @@ export default {
         (widget) => widget.id === option.id
       );
       if (isFeatureAdded) {
-        alert(`${option.displayName} 기능은 이미 추가된 기능입니다.`);
+        // alert(`${option.displayName} 기능은 이미 추가된 기능입니다.`);
         return;
       }
 
@@ -344,7 +344,7 @@ export default {
 
       // 빈 공간이 없는 경우
       if (!isPlaced) {
-        alert('배치할 공간이 부족합니다.');
+        // alert('배치할 공간이 부족합니다.');
         return;
       }
 
@@ -354,7 +354,7 @@ export default {
     // 위젯 삭제 메서드
     deleteWidget(index) {
       this.widgets.splice(index, 1);
-      alert('위젯이 삭제되었습니다.');
+      // alert('위젯이 삭제되었습니다.');
     },
 
     // 드롭다운 토글 메서드
@@ -587,7 +587,7 @@ export default {
           '파일명 생성 요청 에러:',
           error.response?.data || error.message
         );
-        alert('파일명을 저장하는 데 실패했습니다.');
+        // alert('파일명을 저장하는 데 실패했습니다.');
       }
     },
   },
