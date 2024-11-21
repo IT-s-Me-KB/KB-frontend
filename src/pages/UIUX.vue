@@ -1,4 +1,5 @@
 <template>
+
   <div class="main-page">
     <!-- 기존 + 버튼 -->
     <div class="plus-box" @click="navigateToUiuxEdit">
@@ -195,4 +196,5 @@ export default {
   margin-top: 20px;
   justify-content: center;
 }
+
 </style>

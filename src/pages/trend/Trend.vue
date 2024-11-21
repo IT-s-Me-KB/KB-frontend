@@ -1,6 +1,7 @@
 <template>
   <div class="bc">
     <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
+    <br>
     <div>
       <input
           class="d-inline search"
@@ -43,7 +44,7 @@
           </swiper>
         </div>
       </div>
-      <br><br>
+      <br>
 
       <h3>예적금</h3>
       <div v-if="loading" class="loading text-center">

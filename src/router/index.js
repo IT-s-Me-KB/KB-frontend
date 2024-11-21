@@ -71,7 +71,7 @@ const router = createRouter({
       path: '/uiuxedit',
       name: 'UiuxEdit',
       component: UiuxEdit,
-      meta: { hideChatBot: true },
+      meta: { hideChatBot: true,hideHeader: true, hideArrow:true  },
     },
 
     {
